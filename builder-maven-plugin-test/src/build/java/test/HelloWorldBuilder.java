@@ -3,19 +3,23 @@ package test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Builder that writes a message in the log at various phases of the build
+ * cycle.
+ */
 @Builder
-public class MyCustomBuilder {
+public class HelloWorldBuilder {
 
 	private final static Logger LOGGER = LoggerFactory
-			.getLogger(MyCustomBuilder.class);
+			.getLogger(HelloWorldBuilder.class);
 
 	@Execute(phase = Phase.GENERATE_SOURCES)
 	public void sayHello() {
-		LOGGER.info("Hello world");
+		LOGGER.info("Hello world from generate-sources phase!");
 	}
 
 	@Execute(phase = Phase.INSTALL)
 	public void sayHelloFromInstallPhase() {
-		LOGGER.info("Hello world again!");
+		LOGGER.info("Hello world from install phase!");
 	}
 }

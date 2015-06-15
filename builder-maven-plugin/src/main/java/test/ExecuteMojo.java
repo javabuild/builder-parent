@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Iterator;
+import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecution;
@@ -37,12 +39,42 @@ public class ExecuteMojo extends AbstractMojo {
 
 	private Phase currentPhase;
 
+	private URLClassLoader classLoader;
+
 	public void execute() throws MojoExecutionException {
 		currentPhase = Phase.fromString(mojoExecution.getLifecyclePhase());
 		getLog().info("Phase: " + currentPhase.toString());
-		if (buildPlan == null)
+		if (buildPlan == null) {
+			initClassLoader();
 			createBuildPlan();
+		}
 		executePlanForCurrentPhase();
+	}
+
+	private void initClassLoader() throws MojoExecutionException {
+		try {
+			List<String> testClasspathElements = project
+					.getTestClasspathElements();
+			URL[] urls = new URL[testClasspathElements.size() + 1];
+			urls[0] = new File(classesPath).toURI().toURL();
+			int i = 1;
+			for (Iterator<String> iterator = testClasspathElements.iterator(); iterator
+					.hasNext();) {
+				String jar = iterator.next();
+				urls[i] = new File(jar).toURI().toURL();
+				i++;
+			}
+			System.out.println("Classpath:");
+			for (int j = 0; j < urls.length; j++) {
+				System.out.println(urls[j]);
+
+			}
+			classLoader = new URLClassLoader(urls, this.getClass()
+					.getClassLoader());
+		} catch (Exception e) {
+			throw new MojoExecutionException(
+					"Failed to initalize project classpath", e);
+		}
 	}
 
 	private void executePlanForCurrentPhase() throws MojoExecutionException {
@@ -98,27 +130,18 @@ public class ExecuteMojo extends AbstractMojo {
 	private void processClass(String className) throws MalformedURLException,
 			ClassNotFoundException, InstantiationException,
 			IllegalAccessException, InvocationTargetException, IOException {
-		URL[] urls = new URL[1];
-		urls[0] = new File(classesPath).toURI().toURL();
-		URLClassLoader classLoader = new URLClassLoader(urls, this.getClass()
-				.getClassLoader());
-		try {
-			Class<?> theClass = classLoader.loadClass(className);
-			if (theClass.isAnnotationPresent(Builder.class)) {
-				Method[] methods = theClass.getDeclaredMethods();
-				for (int j = 0; j < methods.length; j++) {
-					Method method = methods[j];
-					Execute execute = method.getAnnotation(Execute.class);
-					if (execute != null) {
-						Object instance = theClass.newInstance();
-						buildPlan.addMethodExecution(execute.phase(), instance,
-								method);
-					}
+		Class<?> theClass = classLoader.loadClass(className);
+		if (theClass.isAnnotationPresent(Builder.class)) {
+			Method[] methods = theClass.getDeclaredMethods();
+			for (int j = 0; j < methods.length; j++) {
+				Method method = methods[j];
+				Execute execute = method.getAnnotation(Execute.class);
+				if (execute != null) {
+					Object instance = theClass.newInstance();
+					buildPlan.addMethodExecution(execute.phase(), instance,
+							method);
 				}
 			}
-		} finally {
-			classLoader.close();
 		}
 	}
-
 }
