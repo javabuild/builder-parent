@@ -10,6 +10,7 @@ import java.net.URLClassLoader;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -26,14 +27,20 @@ public class ExecuteMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project}", readonly = true)
 	private MavenProject project;
 
-	@Parameter(defaultValue = "${project.basedir}/src/build/java", readonly = true, required = true)
+	@Parameter(defaultValue = "${project.basedir}/src/build/java", readonly = true)
 	private String sourcePath;
 
-	@Parameter(defaultValue = "${project.basedir}/target/build-classes", readonly = true, required = true)
+	@Parameter(defaultValue = "${project.basedir}/target/build-classes", readonly = true)
 	private String classesPath;
 
 	@Parameter(defaultValue = "${mojoExecution}", readonly = true)
 	private MojoExecution mojoExecution;
+
+	/**
+	 * The directory where the webapp is built (used for webapps only).
+	 */
+	@Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}", readonly = true)
+	private File webappDirectory;
 
 	private BuildPlan buildPlan;
 
@@ -80,12 +87,20 @@ public class ExecuteMojo extends AbstractMojo {
 	private void executePlanForCurrentPhase() throws MojoExecutionException {
 		try {
 			buildPlan.execute(currentPhase);
+			if (Phase.PREPARE_PACKAGE.equals(currentPhase))
+				afterPreparePackage();
 		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
+				| InvocationTargetException | IOException e) {
 			throw new MojoExecutionException(
 					"Failed to execute build classes for phase " + currentPhase,
 					e);
 		}
+
+	}
+
+	private void afterPreparePackage() throws IOException {
+		File webappResources = new File(BuilderFolders.WEBAPP_RESOURCES);
+		FileUtils.copyDirectory(webappResources, webappDirectory);
 
 	}
 
