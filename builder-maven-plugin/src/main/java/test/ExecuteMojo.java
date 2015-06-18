@@ -71,11 +71,6 @@ public class ExecuteMojo extends AbstractMojo {
 				urls[i] = new File(jar).toURI().toURL();
 				i++;
 			}
-			System.out.println("Classpath:");
-			for (int j = 0; j < urls.length; j++) {
-				System.out.println(urls[j]);
-
-			}
 			classLoader = new URLClassLoader(urls, this.getClass()
 					.getClassLoader());
 		} catch (Exception e) {

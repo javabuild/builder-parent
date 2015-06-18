@@ -20,8 +20,12 @@ public class MavenBuilderExtension extends AbstractMavenLifecycleParticipant {
 			throws MavenExecutionException {
 		MavenProject project = session.getCurrentProject();
 
-		project.addTestCompileSourceRoot("src/build/java");
-		project.addTestCompileSourceRoot("src/build/resources");
+		project.addTestCompileSourceRoot(BuilderFolders.BUILD_SOURCES);
+		project.addTestCompileSourceRoot(BuilderFolders.BUILD_RESOURCES);
+		project.addCompileSourceRoot(BuilderFolders.GENERATED_SOURCES);
+		project.addCompileSourceRoot(BuilderFolders.GENERATED_RESOURCES);
+		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_SOURCES);
+		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_RESOURCES);
 
 		Plugin plugin = new Plugin();
 		plugin.setGroupId("test");

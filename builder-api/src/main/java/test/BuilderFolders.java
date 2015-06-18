@@ -5,6 +5,8 @@ public class BuilderFolders {
 		// Do not instantiate, only constants
 	}
 
+	public final static String BUILD_SOURCES = "./src/build/java/";
+	public final static String BUILD_RESOURCES = "./src/build/resources/";
 	public final static String GENERATED_SOURCES = "./target/builder/main/java/";
 	public final static String GENERATED_RESOURCES = "./target/builder/main/resources/";
 	public final static String GENERATED_TEST_SOURCES = "./target/builder/test/java/";
