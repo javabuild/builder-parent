@@ -157,12 +157,12 @@ public class ExecuteMojo extends AbstractMojo {
 			IllegalAccessException, InvocationTargetException, IOException {
 		Class<?> theClass = classLoader.loadClass(className);
 		if (theClass.isAnnotationPresent(Builder.class)) {
+			Object instance = theClass.newInstance();
 			Method[] methods = theClass.getDeclaredMethods();
 			for (int j = 0; j < methods.length; j++) {
 				Method method = methods[j];
 				Execute execute = method.getAnnotation(Execute.class);
 				if (execute != null) {
-					Object instance = theClass.newInstance();
 					buildPlan.addMethodExecution(execute.phase(), instance,
 							method);
 				}
