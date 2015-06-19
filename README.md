@@ -72,8 +72,9 @@ In your build classes, you can generate java sources, test sources, resources, a
    * additional files to include in the war file (for war projects): "target/builder/main/webapp/"
    * additional html pages to deploy in the project's site: "target/builder/site/"
 
+For examples, look at project "builder-maven-plugin-test".
 
-## Contents of this repository
+## Contents of this Git repository
 
    * builder-api: annotations to be used in your build classes
    * builder-maven-plugin: maven plugin/extension to be declared in the project's pom.xml
