@@ -25,6 +25,47 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 @Builder
 public class ThymeleafPagesGenerator {
 
+	private final static Logger LOGGER = LoggerFactory
+			.getLogger(ThymeleafPagesGenerator.class);
+
+	private Charset charset = Charset.forName("UTF-8");
+
+	private File siteFolder;
+
+	private TemplateEngine templateEngine;
+
+	@Execute(phase = Phase.PRE_SITE)
+	public void generatePages() throws IOException {
+		init();
+		generatePage("home", Locale.ENGLISH);
+		generatePage("home", Locale.FRENCH);
+	}
+
+	private void init() {
+		siteFolder = new File(BuilderFolders.SITE);
+		siteFolder.mkdirs();
+		TemplateResolver templateResolver = new TemplateResolver();
+		templateResolver.setResourceResolver(new ProjectResourceResolver());
+		templateResolver.setSuffix(".html");
+		templateEngine = new TemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver);
+		templateEngine.initialize();
+	}
+
+	public void generatePage(String page, Locale locale) throws IOException {
+		LOGGER.info("Generating page " + page + " for locale "
+				+ locale.toString());
+		File pageFile = new File(siteFolder, page + "_" + locale.toString()
+				+ ".html");
+		if (pageFile.exists())
+			pageFile.delete();
+		Context context = new Context(locale);
+		context.setVariable("variable1", "This is a variable");
+		StringWriter writer = new StringWriter();
+		templateEngine.process(page, context, writer);
+		FileUtils.writeStringToFile(pageFile, writer.toString(), charset);
+	}
+
 	private final class ProjectResourceResolver implements IResourceResolver {
 		File srcMainResourceFolder = new File("src/main/resources/");
 
@@ -48,38 +89,4 @@ public class ThymeleafPagesGenerator {
 			return srcMainResourceFolder.toString();
 		}
 	}
-
-	private final static Logger LOGGER = LoggerFactory
-			.getLogger(ThymeleafPagesGenerator.class);
-
-	private Locale locale = Locale.FRANCE;
-	private Charset charset = Charset.forName("UTF-8");
-
-	@Execute(phase = Phase.PRE_SITE)
-	public void generatePages() throws IOException {
-		generatePage("home", locale.ENGLISH);
-		generatePage("home", Locale.FRENCH);
-	}
-
-	public void generatePage(String page, Locale locale) throws IOException {
-		LOGGER.info("Generating page " + page + " for locale "
-				+ locale.toString());
-		File siteFolder = new File(BuilderFolders.SITE);
-		siteFolder.mkdirs();
-		File home = new File(siteFolder, page + "_" + locale.toString()
-				+ ".html");
-		if (home.exists())
-			home.delete();
-		TemplateResolver templateResolver = new TemplateResolver();
-		templateResolver.setResourceResolver(new ProjectResourceResolver());
-		templateResolver.setSuffix(".html");
-		TemplateEngine templateEngine = new TemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver);
-		Context context = new Context(locale);
-		context.setVariable("variable1", "This is a variable");
-		StringWriter writer = new StringWriter();
-		templateEngine.process(page, context, writer);
-		FileUtils.writeStringToFile(home, writer.toString(), charset);
-	}
-
 }
