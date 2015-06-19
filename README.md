@@ -2,7 +2,9 @@
 
 With this plugin, you can put some java code in a source folder "src/build/java". The code will be executed during the maven build. Use annotations to bind the build classes to the maven lifecycle phases.
 
-Requires minimum maven 3.1 
+## Quickstart
+
+The plugin requires minimum maven 3.1 
 
 To test the plugin, de a "mvn install" on the projects in this order:
 
@@ -57,7 +59,21 @@ public class MyCustomBuilder {
 	}
 ```
 
-Contents of this repository:
+## Conventions
+
+In your build classes, you can generate java sources, test sources, resources, add files to a webapp (for war projects) and add pages to the project's site. You just have to place the files in the following folders:
+
+   * build classes: "src/build/java/"
+   * build ressources: "src/build/resources/"
+   * generated sources: "target/builder/main/java/"
+   * generated ressources: "target/builder/main/resources/"
+   * generated test sources: "target/builder/test/java/"
+   * generated test resources: "target/builder/test/resources/"
+   * additional files to include in the war file (for war projects): "target/builder/main/webapp/"
+   * additional html pages to deploy in the project's site: "target/builder/site/"
+
+
+## Contents of this repository
 
    * builder-api: annotations to be used in your build classes
    * builder-maven-plugin: maven plugin/extension to be declared in the project's pom.xml
