@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builder that writes a message in the log at various phases of the build
+ * A builder that writes a message in the log at various phases of the build
  * cycle.
  */
 @Builder

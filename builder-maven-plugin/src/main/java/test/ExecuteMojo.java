@@ -42,6 +42,12 @@ public class ExecuteMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}", readonly = true)
 	private File webappDirectory;
 
+	/**
+	 * The directory where to copy the generated site.
+	 */
+	@Parameter(defaultValue = "${project.build.directory}/generated-site", readonly = true)
+	private File generatedSiteDirectory;
+
 	private BuildPlan buildPlan;
 
 	private Phase currentPhase;
@@ -84,6 +90,8 @@ public class ExecuteMojo extends AbstractMojo {
 			buildPlan.execute(currentPhase);
 			if (Phase.PREPARE_PACKAGE.equals(currentPhase))
 				afterPreparePackage();
+			else if (Phase.PRE_SITE.equals(currentPhase))
+				afterPreSite();
 		} catch (IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | IOException e) {
 			throw new MojoExecutionException(
@@ -95,8 +103,15 @@ public class ExecuteMojo extends AbstractMojo {
 
 	private void afterPreparePackage() throws IOException {
 		File webappResources = new File(BuilderFolders.WEBAPP_RESOURCES);
-		FileUtils.copyDirectory(webappResources, webappDirectory);
+		if (webappResources.exists())
+			FileUtils.copyDirectory(webappResources, webappDirectory);
+	}
 
+	private void afterPreSite() throws IOException {
+		File site = new File(BuilderFolders.SITE);
+		if (site.exists())
+			FileUtils.copyDirectory(site, new File(generatedSiteDirectory,
+					"resources/"));
 	}
 
 	private void createBuildPlan() throws MojoExecutionException {

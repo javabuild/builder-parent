@@ -19,25 +19,32 @@ public class MavenBuilderExtension extends AbstractMavenLifecycleParticipant {
 	public void afterProjectsRead(MavenSession session)
 			throws MavenExecutionException {
 		MavenProject project = session.getCurrentProject();
+		addSourceFolders(project);
+		addPluginExecutions(project);
+		logger.info("Maven builder extension initialized");
+	}
 
+	private void addPluginExecutions(MavenProject project) {
+		Plugin plugin = new Plugin();
+		plugin.setGroupId("test");
+		plugin.setArtifactId("builder-maven-plugin");
+		plugin.setVersion("0.0.1-SNAPSHOT");
+		addPluginExecution(plugin, "compile", Phase.GENERATE_SOURCES);
+		addPluginExecution(plugin, "compile", Phase.PRE_SITE);
+		Phase[] lifecyclePhases = Phase.values();
+		for (int i = 0; i < lifecyclePhases.length; i++) {
+			addPluginExecution(plugin, "execute", lifecyclePhases[i]);
+		}
+		project.getBuild().addPlugin(plugin);
+	}
+
+	private void addSourceFolders(MavenProject project) {
 		project.addTestCompileSourceRoot(BuilderFolders.BUILD_SOURCES);
 		project.addTestCompileSourceRoot(BuilderFolders.BUILD_RESOURCES);
 		project.addCompileSourceRoot(BuilderFolders.GENERATED_SOURCES);
 		project.addCompileSourceRoot(BuilderFolders.GENERATED_RESOURCES);
 		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_SOURCES);
 		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_RESOURCES);
-
-		Plugin plugin = new Plugin();
-		plugin.setGroupId("test");
-		plugin.setArtifactId("builder-maven-plugin");
-		plugin.setVersion("0.0.1-SNAPSHOT");
-		addPluginExecution(plugin, "compile", Phase.GENERATE_SOURCES);
-		Phase[] lifecyclePhases = Phase.values();
-		for (int i = 0; i < lifecyclePhases.length; i++) {
-			addPluginExecution(plugin, "execute", lifecyclePhases[i]);
-		}
-		project.getBuild().addPlugin(plugin);
-		logger.info("Maven builder extension initialized");
 	}
 
 	private void addPluginExecution(Plugin plugin, String goal, Phase phase) {

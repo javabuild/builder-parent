@@ -1,0 +1,12 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<title th:text="#{home.title}">Page title</title>
+</head>
+<body>
+	<p th:text="#{home.welcome}">Welcome text</p>
+	<p th:text="${variable1}">variable1</p>
+	<p th:include="inc">inc</p>
+</body>
+</html>

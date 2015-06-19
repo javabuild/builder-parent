@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Builder that copies resources from a webjar into the war.
+ * A builder that copies resources from a webjar into the war.
  */
 @Builder
 public class CopyResourcesToWarBuilder {

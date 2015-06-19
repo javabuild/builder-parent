@@ -9,8 +9,11 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
+/**
+ * A builder that generates a java class.
+ */
 @Builder
-public class ClassGeneratorBuilder {
+public class ClassGenerator {
 
 	@Execute(phase = Phase.GENERATE_SOURCES)
 	public void generateHelloWorldClass() throws IOException {

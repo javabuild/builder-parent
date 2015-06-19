@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="${project.name}">
+	<bannerLeft>
+		<name>${project.name}</name>
+	</bannerLeft>
+	<body>
+		<links>
+			<item name="${project.name}" href="${project.url}" />
+		</links>
+		<menu ref="parent" />
+		<menu ref="modules" />
+		<menu ref="reports" />
+		<menu name="Maquette">
+			<item name="Home_en" href="home_en.html" />
+			<item name="Home_fr" href="home_fr.html" />
+		</menu>
+	</body>
+</project>
