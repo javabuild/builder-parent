@@ -19,7 +19,7 @@ public class MavenBuilderExtension extends AbstractMavenLifecycleParticipant {
 	public void afterProjectsRead(MavenSession session)
 			throws MavenExecutionException {
 		MavenProject project = session.getCurrentProject();
-		addSourceFolders(project);
+		SourceFoldersUtils.addSourceFolders(project);
 		addPluginExecutions(project);
 		logger.info("Maven builder extension initialized");
 	}
@@ -36,15 +36,6 @@ public class MavenBuilderExtension extends AbstractMavenLifecycleParticipant {
 			addPluginExecution(plugin, "execute", lifecyclePhases[i]);
 		}
 		project.getBuild().addPlugin(plugin);
-	}
-
-	private void addSourceFolders(MavenProject project) {
-		project.addTestCompileSourceRoot(BuilderFolders.BUILD_SOURCES);
-		project.addTestCompileSourceRoot(BuilderFolders.BUILD_RESOURCES);
-		project.addCompileSourceRoot(BuilderFolders.GENERATED_SOURCES);
-		project.addCompileSourceRoot(BuilderFolders.GENERATED_RESOURCES);
-		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_SOURCES);
-		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_RESOURCES);
 	}
 
 	private void addPluginExecution(Plugin plugin, String goal, Phase phase) {

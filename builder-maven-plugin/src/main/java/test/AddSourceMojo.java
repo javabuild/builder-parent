@@ -14,12 +14,7 @@ public class AddSourceMojo extends AbstractMojo {
 	private MavenProject project;
 
 	public void execute() {
-		project.addTestCompileSourceRoot(BuilderFolders.BUILD_SOURCES);
-		project.addTestCompileSourceRoot(BuilderFolders.BUILD_RESOURCES);
-		project.addCompileSourceRoot(BuilderFolders.GENERATED_SOURCES);
-		project.addCompileSourceRoot(BuilderFolders.GENERATED_RESOURCES);
-		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_SOURCES);
-		project.addTestCompileSourceRoot(BuilderFolders.GENERATED_TEST_RESOURCES);
+		SourceFoldersUtils.addSourceFolders(project);
 	}
 
 }
