@@ -8,13 +8,13 @@ The plugin requires minimum maven 3.1
 
 To test the plugin, de a "mvn install" on the projects in this order:
 
-   1. builder-api
-   1. builder-maven-plugin
+   1. javabuild-api
+   1. javabuild-maven-plugin
 
 Then to use the plugin in your project:
 
    1. declare the plugin in the project's pom.xml
-   1. add dependency to builder-api
+   1. add dependency to javabuild-api
    1. create a folder "src/build/java"
    1. create classes and use the annotations
    
@@ -23,7 +23,7 @@ Then to use the plugin in your project:
 		<plugins>
 			<plugin>
 				<groupId>test</groupId>
-				<artifactId>builder-maven-plugin</artifactId>
+				<artifactId>javabuild-maven-plugin</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 				<extensions>true</extensions>
 				<!-- For m2eclipse to detect the source folder -->
@@ -41,7 +41,7 @@ Then to use the plugin in your project:
 	<dependencies>
 		<dependency>
 			<groupId>test</groupId>
-			<artifactId>builder-api</artifactId>
+			<artifactId>javabuild-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 ```
@@ -65,18 +65,18 @@ In your build classes, you can generate java sources, test sources, resources, a
 
    * build classes: "src/build/java/"
    * build ressources: "src/build/resources/"
-   * generated sources: "target/builder/main/java/"
-   * generated ressources: "target/builder/main/resources/"
-   * generated test sources: "target/builder/test/java/"
-   * generated test resources: "target/builder/test/resources/"
-   * additional files to include in the war file (for war projects): "target/builder/main/webapp/"
-   * additional html pages to deploy in the project's site: "target/builder/site/"
+   * generated sources: "target/javabuild/main/java/"
+   * generated ressources: "target/javabuild/main/resources/"
+   * generated test sources: "target/javabuild/test/java/"
+   * generated test resources: "target/javabuild/test/resources/"
+   * additional files to include in the war file (for war projects): "target/javabuild/main/webapp/"
+   * additional html pages to deploy in the project's site: "target/javabuild/site/"
 
-For examples, look at project "builder-maven-plugin-test".
+For examples, look at project "javabuild-maven-plugin-test".
 
 ## Contents of this Git repository
 
-   * builder-api: annotations to be used in your build classes
-   * builder-maven-plugin: maven plugin/extension to be declared in the project's pom.xml
-   * builder-maven-plugin-test: an example project
+   * javabuild-api: annotations to be used in your build classes
+   * javabuild-maven-plugin: maven plugin/extension to be declared in the project's pom.xml
+   * javabuild-maven-plugin-test: an example project
    
