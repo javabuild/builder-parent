@@ -45,8 +45,8 @@ public class MavenBuilderExtension extends AbstractMavenLifecycleParticipant {
 	private void addPluginExecutions(MavenProject project) {
 		Plugin plugin = new Plugin();
 		plugin.setGroupId("net.java.javabuild");
-		plugin.setArtifactId("javabuild-maven-plugin");
-		plugin.setVersion("1.0-SNAPSHOT");
+		plugin.setArtifactId("builder-maven-plugin");
+		plugin.setVersion("0.9-SNAPSHOT");
 		addPluginExecution(plugin, "compile", Phase.GENERATE_SOURCES);
 		addPluginExecution(plugin, "compile", Phase.PRE_SITE);
 		Phase[] lifecyclePhases = Phase.values();
