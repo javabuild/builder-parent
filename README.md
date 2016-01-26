@@ -1,2 +1,3 @@
-{{md  site/markdown/index.md }}
-{{md  site/markdown/usage.md }}
+Plugin documentation is available here:
+
+https://javabuild.java.net/builder-maven-plugin/usage.html
