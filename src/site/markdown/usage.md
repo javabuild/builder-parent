@@ -20,7 +20,7 @@ Then to use the plugin in your project:
 			<plugin>
 				<groupId>test</groupId>
 				<artifactId>builder-maven-plugin</artifactId>
-				<version>0.9-SNAPSHOT</version>
+				<version>1.0</version>
 				<extensions>true</extensions>
 				<!-- For m2eclipse to detect the source folder -->
 				<executions>
@@ -38,7 +38,7 @@ Then to use the plugin in your project:
 		<dependency>
 			<groupId>test</groupId>
 			<artifactId>builder-api</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 ```
 

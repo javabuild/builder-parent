@@ -22,6 +22,13 @@
 		<developerConnection>scm:git:https://github.com/javabuild/builder-maven-plugin.git</developerConnection>
 		<url>https://github.com/javabuild/builder-maven-plugin</url>
 	</scm>
+	<distributionManagement>
+		<site>
+			<id>javabuild</id>
+			<name>javabuild on java.net</name>
+			<url>dav:https://website.java.net/website/javabuild/builder-maven-plugin/</url>
+		</site>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -66,7 +73,7 @@
 		<dependency>
 			<groupId>net.java.javabuild</groupId>
 			<artifactId>builder-api</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -180,7 +187,8 @@
 	</reporting>
 	<parent>
 		<groupId>net.java.javabuild</groupId>
-		<version>0.9-SNAPSHOT</version>
 		<artifactId>builder-parent</artifactId>
+		<version>1.0</version>
 	</parent>
+	<version>0.9-SNAPSHOT</version>
 </project>
