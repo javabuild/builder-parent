@@ -13,7 +13,7 @@ To use the plugin in your project:
 <build>
 	<plugins>
 		<plugin>
-			<groupId>test</groupId>
+			<groupId>net.java.javabuild</groupId>
 			<artifactId>builder-maven-plugin</artifactId>
 			<version>1.0</version>
 			<extensions>true</extensions>
@@ -31,7 +31,7 @@ To use the plugin in your project:
 </build>
 <dependencies>
 	<dependency>
-		<groupId>test</groupId>
+		<groupId>net.java.javabuild</groupId>
 		<artifactId>builder-api</artifactId>
 		<version>1.0</version>
 	</dependency>
