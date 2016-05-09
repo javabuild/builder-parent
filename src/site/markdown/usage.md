@@ -5,7 +5,7 @@ The plugin requires minimum maven 3.1
 To use the plugin in your project:
 
    1. declare the plugin in the project's pom.xml
-   1. add dependency to builder-api
+   1. add dependency to builder-api with "test" scope
    1. create a folder "src/build/java"
    1. create classes and use the annotations
    
