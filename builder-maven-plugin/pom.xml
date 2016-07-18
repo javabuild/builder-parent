@@ -148,6 +148,7 @@
 				<version>2.0.0</version>
 				<configuration>
 					<debug>false</debug>
+					<streamLogs>true</streamLogs>
 					<projectsDirectory>src/it</projectsDirectory>
 					<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
 					<preBuildHookScript>setup</preBuildHookScript>
