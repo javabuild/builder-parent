@@ -39,8 +39,8 @@ under the License.
     <menu name="Overview">
       <item name="About" href="index.html"/>
       <item name="builder-maven-plugin" href="builder-maven-plugin/usage.html"/>
-      <item name="builder-api" href="builder-api/apidocs/"/>
-      <item name="examples" href="https://github.com/javabuild/builder-maven-plugin-test"/>
+      <item name="builder-api" href="builder-api/apidocs/index.html"/>
+      <item name="examples" href="https://github.com/javabuild/builder-parent/tree/master/builder-maven-plugin/src/it/builder-maven-plugin-test"/>
     </menu>
   </body>
 </project>

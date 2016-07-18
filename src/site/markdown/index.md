@@ -10,7 +10,7 @@ Then you just write java classes with a few **annotations** in order to bind the
 
 ![Source example](images/ScreenShot002.png "Source example") 
 
-<a href="https://github.com/javabuild"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" /></a>
+<a href="https://github.com/javabuild/builder-parent"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" /></a>
 
 In the end, you will still have a **pom.xml** file with the essential informations of the project (dependencies, scm...) but for all the more custom tasks, no more need to use a complex and poorly documented maven plugin, no more need for maven-antrun-plugin, you just code java in the project. This is only some examples of What you can do :
 
@@ -25,5 +25,5 @@ In the end, you will still have a **pom.xml** file with the essential informatio
 ### Where to start?
 
 * see the <a href="builder-maven-plugin/usage.html">usage page of the maven plugin</a> for how to use the plugin
-* see the <a href="https://github.com/javabuild/builder-maven-plugin-test">example project on Github</a> for examples on how to use it
+* see the <a href="https://github.com/javabuild/builder-parent/tree/master/builder-maven-plugin/src/it/builder-maven-plugin-test">example project on Github</a> for examples on how to use it
 
