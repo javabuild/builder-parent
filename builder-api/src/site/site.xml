@@ -21,9 +21,7 @@ under the License.
 
 <project xmlns="http://maven.apache.org/DECORATION/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
-  name="javabuild">
-  <bannerLeft><name>javabuild</name></bannerLeft>
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
   <body>
   	<head>
 	  	<script>
@@ -37,10 +35,8 @@ under the License.
 		</script>
   	</head>
     <menu name="Overview">
-      <item name="About" href="index.html"/>
-      <item name="builder-maven-plugin" href="builder-maven-plugin/usage.html"/>
-      <item name="builder-api" href="builder-api/apidocs/"/>
-      <item name="examples" href="https://github.com/javabuild/builder-maven-plugin-test"/>
+      <item name="Introduction" href="index.html"/>
+      <item name="Javadoc" href="apidocs/index.html"/>
     </menu>
   </body>
 </project>

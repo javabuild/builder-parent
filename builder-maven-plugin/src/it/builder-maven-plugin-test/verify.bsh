@@ -1,0 +1,11 @@
+import java.io.*;
+ 
+assertFileExists (String fileName) {
+	File file = new File(basedir, fileName);
+	if (!file.isFile()) {
+	    throw new FileNotFoundException( "Could not find generated file: " + fileName );
+	}
+}
+
+assertFileExists("target/builder/main/java/com/example/helloworld/HelloWorld.java");
+assertFileExists("target/builder/main/webapp/bootstrap/3.3.4/js/bootstrap.js");

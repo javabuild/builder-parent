@@ -1,3 +1,3 @@
-Plugin documentation is available here:
+# builder-parent
 
-https://javabuild.java.net/builder-maven-plugin/usage.html
+This project contains the site home page and some common plugins and versions used by builder-api and builder-maven-plugin projects

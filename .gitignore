@@ -1,5 +1,4 @@
-/target/
-/.settings/
-/.classpath
 /.project
-/builder-maven-plugin.iml
+/.settings/
+/target/
+/bin/

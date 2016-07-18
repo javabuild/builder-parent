@@ -1,5 +1,8 @@
 package net.java.javabuild;
 
+import java.io.IOException;
+import java.util.Properties;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -42,11 +45,17 @@ public class MavenBuilderExtension extends AbstractMavenLifecycleParticipant {
 		logger.info("Maven builder extension initialized");
 	}
 
-	private void addPluginExecutions(MavenProject project) {
+	private void addPluginExecutions(MavenProject project) throws MavenExecutionException {
+		Properties properties = new Properties();
+		try {
+			properties.load(this.getClass().getResourceAsStream("version.properties"));
+		} catch (IOException e) {
+			throw new MavenExecutionException("Could not read plugin properties", e);
+		}
 		Plugin plugin = new Plugin();
-		plugin.setGroupId("net.java.javabuild");
-		plugin.setArtifactId("builder-maven-plugin");
-		plugin.setVersion("1.0");
+		plugin.setGroupId(properties.getProperty("groupId"));
+		plugin.setArtifactId(properties.getProperty("artifactId"));
+		plugin.setVersion(properties.getProperty("version"));
 		addPluginExecution(plugin, "compile", Phase.GENERATE_SOURCES);
 		addPluginExecution(plugin, "compile", Phase.PRE_SITE);
 		Phase[] lifecyclePhases = Phase.values();

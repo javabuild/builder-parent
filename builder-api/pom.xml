@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>builder-api</artifactId>
+	<parent>
+		<groupId>net.java.javabuild</groupId>
+		<artifactId>builder-parent</artifactId>
+		<version>1.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/javabuild/builder-api/issues</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:git:https://github.com/javabuild/builder-api.git</connection>
+		<developerConnection>scm:git:https://github.com/javabuild/builder-api.git</developerConnection>
+		<url>https://github.com/javabuild/builder-api</url>
+	</scm>
+	<distributionManagement>
+		<site>
+			<id>javabuild</id>
+			<name>javabuild on java.net</name>
+			<url>dav:https://website.java.net/website/javabuild/builder-api/</url>
+		</site>
+	</distributionManagement>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
