@@ -113,15 +113,18 @@ public class ExecuteMojo extends AbstractMojo {
 	}
 
 	private void createBuildPlan() throws MojoExecutionException {
-		buildPlan = new BuildPlan();
+		buildPlan = new BuildPlan(getLog());
 		getLog().info("Looking for build classes");
 		File sourceFolder = new File(sourcePath);
-		try {
-			findBuildClasses("", sourceFolder);
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException | IOException e) {
-			throw new MojoExecutionException("Failed to load build classes", e);
-		}
+		if (sourceFolder.exists())
+			try {
+				findBuildClasses("", sourceFolder);
+			} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+					| IllegalAccessException | IllegalArgumentException | InvocationTargetException | IOException e) {
+				throw new MojoExecutionException("Failed to load build classes", e);
+			}
+		else
+			getLog().info("Build source folder " + sourcePath + " does not exist");
 	}
 
 	private void findBuildClasses(String parent, File folder)

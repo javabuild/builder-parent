@@ -27,29 +27,28 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.java.javabuild.Phase;
+import org.apache.maven.plugin.logging.Log;
 
 public class BuildPlan {
-	private final static Logger LOGGER = LoggerFactory
-			.getLogger(BuildPlan.class);
+	private final Log log;
+
+	public BuildPlan(Log log) {
+		this.log = log;
+	}
 
 	private Map<Phase, List<MethodInvocation>> phases = new HashMap<Phase, List<MethodInvocation>>();
 
-	public void execute(Phase phase) throws IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public void execute(Phase phase)
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		List<MethodInvocation> methodInvocations = phases.get(phase);
 		if (methodInvocations != null) {
-			for (Iterator<MethodInvocation> iterator = methodInvocations
-					.iterator(); iterator.hasNext();) {
+			for (Iterator<MethodInvocation> iterator = methodInvocations.iterator(); iterator.hasNext();) {
 				MethodInvocation methodInvocation = iterator.next();
-				LOGGER.info("Invoking: " + methodInvocation.toString());
+				log.info("Invoking: " + methodInvocation.toString());
 				methodInvocation.execute();
 			}
 		} else {
-			LOGGER.info("Nothing to execute");
+			log.info("Nothing to execute");
 		}
 	}
 
