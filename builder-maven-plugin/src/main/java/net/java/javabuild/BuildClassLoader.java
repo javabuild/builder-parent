@@ -21,7 +21,7 @@ public class BuildClassLoader extends URLClassLoader {
 	}
 
 	public BuildClassLoader(List<String> testClasspathElements, String classesPath) throws MalformedURLException {
-		super(toUrlArray(testClasspathElements, classesPath), CLASS_LOADER);
+		super(toUrlArray(testClasspathElements, classesPath));
 	}
 
 	private static URL[] toUrlArray(List<String> testClasspathElements, String classesPath)
