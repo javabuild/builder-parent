@@ -24,10 +24,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -39,11 +35,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
-
-import net.java.javabuild.Builder;
-import net.java.javabuild.BuilderFolders;
-import net.java.javabuild.Execute;
-import net.java.javabuild.Phase;
 
 @Mojo(name = "execute", defaultPhase = LifecyclePhase.NONE, threadSafe = true, requiresDependencyResolution = ResolutionScope.TEST, instantiationStrategy = InstantiationStrategy.KEEP_ALIVE)
 public class ExecuteMojo extends AbstractMojo {
@@ -76,7 +67,7 @@ public class ExecuteMojo extends AbstractMojo {
 
 	private Phase currentPhase;
 
-	private URLClassLoader classLoader;
+	private ClassLoader classLoader;
 
 	public void execute() throws MojoExecutionException {
 		currentPhase = Phase.fromString(mojoExecution.getLifecyclePhase());
@@ -90,22 +81,9 @@ public class ExecuteMojo extends AbstractMojo {
 
 	private void initClassLoader() throws MojoExecutionException {
 		try {
-			List<String> testClasspathElements = project
-					.getTestClasspathElements();
-			URL[] urls = new URL[testClasspathElements.size() + 1];
-			urls[0] = new File(classesPath).toURI().toURL();
-			int i = 1;
-			for (Iterator<String> iterator = testClasspathElements.iterator(); iterator
-					.hasNext();) {
-				String jar = iterator.next();
-				urls[i] = new File(jar).toURI().toURL();
-				i++;
-			}
-			classLoader = new URLClassLoader(urls, this.getClass()
-					.getClassLoader());
+			classLoader = new BuildClassLoader(project.getTestClasspathElements(), classesPath);
 		} catch (Exception e) {
-			throw new MojoExecutionException(
-					"Failed to initalize project classpath", e);
+			throw new MojoExecutionException("Failed to initalize project classpath", e);
 		}
 	}
 
@@ -116,11 +94,8 @@ public class ExecuteMojo extends AbstractMojo {
 				afterPreparePackage();
 			else if (Phase.PRE_SITE.equals(currentPhase))
 				afterPreSite();
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | IOException e) {
-			throw new MojoExecutionException(
-					"Failed to execute build classes for phase " + currentPhase,
-					e);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | IOException e) {
+			throw new MojoExecutionException("Failed to execute build classes for phase " + currentPhase, e);
 		}
 
 	}
@@ -134,8 +109,7 @@ public class ExecuteMojo extends AbstractMojo {
 	private void afterPreSite() throws IOException {
 		File site = new File(BuilderFolders.SITE);
 		if (site.exists())
-			FileUtils.copyDirectory(site, new File(generatedSiteDirectory,
-					"resources/"));
+			FileUtils.copyDirectory(site, new File(generatedSiteDirectory, "resources/"));
 	}
 
 	private void createBuildPlan() throws MojoExecutionException {
@@ -144,18 +118,15 @@ public class ExecuteMojo extends AbstractMojo {
 		File sourceFolder = new File(sourcePath);
 		try {
 			findBuildClasses("", sourceFolder);
-		} catch (ClassNotFoundException | NoSuchMethodException
-				| SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | IOException e) {
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException | InvocationTargetException | IOException e) {
 			throw new MojoExecutionException("Failed to load build classes", e);
 		}
 	}
 
 	private void findBuildClasses(String parent, File folder)
-			throws ClassNotFoundException, NoSuchMethodException,
-			SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException, IOException {
+			throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
 		File[] files = folder.listFiles();
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
@@ -176,9 +147,8 @@ public class ExecuteMojo extends AbstractMojo {
 		}
 	}
 
-	private void processClass(String className) throws MalformedURLException,
-			ClassNotFoundException, InstantiationException,
-			IllegalAccessException, InvocationTargetException, IOException {
+	private void processClass(String className) throws MalformedURLException, ClassNotFoundException,
+			InstantiationException, IllegalAccessException, InvocationTargetException, IOException {
 		Class<?> theClass = classLoader.loadClass(className);
 		if (theClass.isAnnotationPresent(Builder.class)) {
 			Object instance = theClass.newInstance();
@@ -187,8 +157,7 @@ public class ExecuteMojo extends AbstractMojo {
 				Method method = methods[j];
 				Execute execute = method.getAnnotation(Execute.class);
 				if (execute != null) {
-					buildPlan.addMethodExecution(execute.phase(), instance,
-							method);
+					buildPlan.addMethodExecution(execute.phase(), instance, method);
 				}
 			}
 		}
