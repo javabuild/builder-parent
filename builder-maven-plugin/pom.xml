@@ -137,7 +137,6 @@
 					<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
 					<preBuildHookScript>setup</preBuildHookScript>
 					<postBuildHookScript>verify</postBuildHookScript>
-					<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
 					<pomIncludes>
 						<pomInclude>*/pom.xml</pomInclude>
 					</pomIncludes>
