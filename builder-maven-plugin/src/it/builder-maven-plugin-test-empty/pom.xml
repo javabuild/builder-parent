@@ -1,13 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.java.javabuild</groupId>
 	<artifactId>builder-maven-plugin-test-empty</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
-	<parent>
-		<groupId>net.java.javabuild</groupId>
-		<artifactId>builder-parent</artifactId>
-		<version>1.1-SNAPSHOT</version>
-	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
@@ -18,7 +15,7 @@
 			<plugin>
 				<groupId>net.java.javabuild</groupId>
 				<artifactId>builder-maven-plugin</artifactId>
-				<version>${project.version}</version>
+				<version>@project.version@</version>
 				<extensions>true</extensions>
 				<!-- For m2eclipse to detect the source folder -->
 				<executions>
@@ -36,7 +33,7 @@
 		<dependency>
 			<groupId>net.java.javabuild</groupId>
 			<artifactId>builder-api</artifactId>
-			<version>${project.version}</version>
+			<version>@project.version@</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

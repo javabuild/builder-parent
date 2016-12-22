@@ -19,22 +19,6 @@
 		<version>1.1-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/javabuild/builder-maven-plugin/issues</url>
-	</issueManagement>
-	<scm>
-		<connection>scm:git:https://github.com/javabuild/builder-maven-plugin.git</connection>
-		<developerConnection>scm:git:https://github.com/javabuild/builder-maven-plugin.git</developerConnection>
-		<url>https://github.com/javabuild/builder-maven-plugin</url>
-	</scm>
-	<distributionManagement>
-		<site>
-			<id>javabuild</id>
-			<name>javabuild on java.net</name>
-			<url>dav:https://website.java.net/website/javabuild/builder-maven-plugin/</url>
-		</site>
-	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>

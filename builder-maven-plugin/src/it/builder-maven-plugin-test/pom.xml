@@ -1,33 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.java.javabuild</groupId>
 	<artifactId>builder-maven-plugin-test</artifactId>
+	<version>1.0</version>
 	<packaging>war</packaging>
-	<parent>
-		<groupId>net.java.javabuild</groupId>
-		<artifactId>builder-parent</artifactId>
-		<version>1.1-SNAPSHOT</version>
-	</parent>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/javabuild/builder-maven-plugin-test/issues</url>
-	</issueManagement>
-	<scm>
-		<connection>scm:git:https://github.com/javabuild/builder-maven-plugin-test.git</connection>
-		<developerConnection>scm:git:https://github.com/javabuild/builder-maven-plugin-test.git</developerConnection>
-		<url>https://github.com/javabuild/builder-maven-plugin-test</url>
-	</scm>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>net.java.javabuild</groupId>
 				<artifactId>builder-maven-plugin</artifactId>
-				<version>${project.version}</version>
+				<version>@project.version@</version>
 				<extensions>true</extensions>
 				<!-- For m2eclipse to detect the source folder -->
 				<executions>
@@ -45,7 +33,7 @@
 		<dependency>
 			<groupId>net.java.javabuild</groupId>
 			<artifactId>builder-api</artifactId>
-			<version>${project.version}</version>
+			<version>@project.version@</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
