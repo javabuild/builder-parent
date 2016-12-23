@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.java.javabuild</groupId>
 	<artifactId>builder-parent</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>pom</packaging>
 	<url>http://javabuild.java.net/</url>
 	<description>A set of tools including a maven plugin to execute custom java code during the project build.</description>
@@ -27,7 +27,7 @@
 		<connection>scm:git:https://github.com/javabuild/builder-parent.git</connection>
 		<developerConnection>scm:git:https://github.com/javabuild/builder-parent.git</developerConnection>
 		<url>https://github.com/javabuild/builder-parent</url>
-		<tag>HEAD</tag>
+		<tag>builder-parent-1.1</tag>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
