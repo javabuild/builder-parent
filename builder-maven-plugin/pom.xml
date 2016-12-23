@@ -205,4 +205,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	<name>builder-maven-plugin</name>
 </project>

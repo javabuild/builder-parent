@@ -143,4 +143,5 @@
 		<module>builder-api</module>
 		<module>builder-maven-plugin</module>
 	</modules>
+	<name>builder-parent</name>
 </project>

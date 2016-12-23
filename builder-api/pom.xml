@@ -24,4 +24,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	<name>builder-api</name>
 </project>
