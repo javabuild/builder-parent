@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.java.javabuild</groupId>
 	<artifactId>builder-parent</artifactId>
 	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<url>http://javabuild.java.net/</url>
+	<url>https://javabuild.github.io/</url>
 	<description>A set of tools including a maven plugin to execute custom java code during the project build.</description>
 	<licenses>
 		<license>
@@ -38,11 +39,6 @@
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
-		<site>
-			<id>javabuild</id>
-			<name>javabuild on java.net</name>
-			<url>dav:https://website.java.net/website/javabuild/</url>
-		</site>
 	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -60,16 +56,25 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.6</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.wagon</groupId>
-						<artifactId>wagon-webdav-jackrabbit</artifactId>
-						<version>2.10</version>
-					</dependency>
-				</dependencies>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.12</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site</phase>
+						<configuration>
+							<message>Uploading site to github.io</message>
+							<server>github</server>
+							<repositoryName>javabuild.github.io</repositoryName>
+							<repositoryOwner>javabuild</repositoryOwner>
+							<noJekyll>true</noJekyll>
+							<branch>refs/heads/master</branch>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

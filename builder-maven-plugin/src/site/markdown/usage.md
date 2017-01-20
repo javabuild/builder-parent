@@ -15,7 +15,7 @@ To use the plugin in your project:
 		<plugin>
 			<groupId>net.java.javabuild</groupId>
 			<artifactId>builder-maven-plugin</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 			<extensions>true</extensions>
 			<!-- For m2eclipse to detect the source folder -->
 			<executions>
@@ -33,7 +33,7 @@ To use the plugin in your project:
 	<dependency>
 		<groupId>net.java.javabuild</groupId>
 		<artifactId>builder-api</artifactId>
-		<version>1.0</version>
+		<version>1.1</version>
 	</dependency>
 ```
 
