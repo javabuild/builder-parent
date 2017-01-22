@@ -19,23 +19,13 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd"
-  name="javabuild">
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd"
+	name="javabuild">
   <bannerLeft><name>javabuild</name></bannerLeft>
+  <googleAnalyticsAccountId>UA-72904650-2</googleAnalyticsAccountId>
   <body>
-  	<head>
-	  	<![CDATA[<script>
-			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			
-			  ga('create', 'UA-72904650-1', 'auto');
-			  ga('send', 'pageview');
-		</script>]]>
-  	</head>
     <menu name="Overview">
       <item name="About" href="index.html"/>
       <item name="builder-maven-plugin" href="builder-maven-plugin/usage.html"/>
